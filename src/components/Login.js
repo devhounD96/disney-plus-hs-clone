@@ -10,10 +10,11 @@ const Login = () => {
                 <SignUp>GET ALL THERE</SignUp>
                 <Description>
                 In our endeavour to drive meaningful engagement with our audience, 
-                Disney+ Hotstar is investing in generating content keeping in mind 
+                Disney+ Hot star is investing in generating content keeping in mind 
                 the sentiments and attitudes of our consumers and has enjoyed great 
                 success with original programming content.
                 </Description>
+                <CTALogoTwo src='/images/cta-logo-two.png' alt='cta-logo-two' />
             </CTA>
             <BgImage />
         </Content>
@@ -100,5 +101,17 @@ const SignUp = styled.a`
 `
 
 const Description = styled.p`
+        color: hsla(0, 0%, 95.3%, 1);
+        font-size: 11px;
+        margin: 0 0 24px;
+        line-height: 1.5;
+        letter-spacing: 1.5px;
+`
 
+const CTALogoTwo = styled.img`
+        max-width: 600px;
+        margin-bottom: 20px;
+        display: inline-block;
+        vertical-align: bottom;
+        width: 100%;
 `
