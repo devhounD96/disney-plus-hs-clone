@@ -1,8 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import ImgSlider from './ImgSlider'
+import NewDisney from './NewDisney'
 import Recommends from './Recommends'
+import Originals from './Originals'
 import Viewers from './Viewers'
+import Trending from './Trending'
 
 const Home = () => {
   return (
@@ -10,6 +13,9 @@ const Home = () => {
         <ImgSlider />
         <Viewers />
         <Recommends />
+        <NewDisney />
+        <Originals />
+        <Trending />
     </Container>
   )
 }
