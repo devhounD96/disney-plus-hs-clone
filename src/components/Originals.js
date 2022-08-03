@@ -1,38 +1,31 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { selectOriginal } from '../features/movie/movieSlice'
 
-const originals = () => {
+const Originals = () => {
+  const movies = useSelector(selectOriginal);
   return (
     <Container>
         <h4>Originals</h4>
         <Content>
-            <Wrap>
-              <Link to='/'>
-                <img src='https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/0B2682B4B01548242036066A1428197E2CC6DB23135B43CEE90A854D4F1055F8/scale?width=800&aspectRatio=1.78&format=jpeg' alt='/' />
+        {
+            movies && movies.map((movie, index) =>(
+            <Wrap key={index}>
+              {movie.id}
+              <Link to={'/detail/'+movie.id}>
+                <img src={movie.cardImg} alt={movie.title} />
               </Link>
             </Wrap>
-            <Wrap>
-              <Link to='/'>
-                <img src='https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/38045EEFBFE83AE3CBDDBBD50536A23A14BEBE60639462FBAA16466726014046/badging?width=800&aspectRatio=1.78&format=jpeg&label=originals' alt='/' />
-              </Link>
-            </Wrap>
-            <Wrap>
-              <Link to='/'>
-                <img src='https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/A62CB342AF6600C794BDEAC8C49D6A81201CD49E614CC421ED08B0ADF005573B/scale?width=800&aspectRatio=1.78&format=jpeg' alt='/' />
-              </Link>
-            </Wrap>
-            <Wrap>
-              <Link to='/'>
-                <img src='https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/593B2865F439C94D2D8364CB31AA124371E89AF73BA4BEC2CE4C86F7ABE4EB37/scale?width=800&aspectRatio=1.78&format=jpeg' alt='/' />
-              </Link>
-            </Wrap>
+            ))
+          }
         </Content>
     </Container>
   )
 }
 
-export default originals
+export default Originals
 
 const Container = styled.div`
         padding: 0 0 26px;
