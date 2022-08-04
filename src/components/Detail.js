@@ -1,14 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect} from 'react'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import db from '../firebase'
 
 const Detail = () => {
+    const { id } = useParams();
+    const [detailData, setDetailData] = useState({});
+
+    useEffect(()=>{
+        db.collection('movies').doc(id).get().then((doc)=>{
+            if(doc.exists){
+                setDetailData(doc.data());
+            }
+            else{
+                console.log('No such doc found');
+            }
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }, [])
   return (
     <Container>
         <Background>
-            <img src='https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/4E9E81584305009D6385F6178D4B6930E97CD6EC4A3B53C818400DEF778FFA9A/scale?width=1440&aspectRatio=1.78&format=jpeg' alt='' />
+            <img src={detailData.backgroundImg} alt={detailData.title} />
         </Background>
         <ImgTitle>
-            <img src='https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/50B933E83609BEEFEDFA177A6D96DBFA7804C14F70A0B5AB314E892E65498ACF/scale?width=1440&aspectRatio=1.78' alt='' />
+            <img src={detailData.titleImg} alt={detailData.title} />
         </ImgTitle>
         <ContentMeta>
             <Controls>
@@ -24,7 +42,14 @@ const Detail = () => {
                     <span></span>
                     <span></span>
                 </AddList>
+                <GroupWatch>
+                    <div>
+                        <img src='/images/group-icon.png' alt='group watch' />
+                    </div>
+                </GroupWatch>
             </Controls>
+            <SubTitle>{detailData.subTitle}</SubTitle>
+            <Description>{detailData.description}</Description>
         </ContentMeta>
     </Container>
   )
@@ -139,4 +164,68 @@ const AddList = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 50%;
+        border: 2px solid white;
+        cursor: pointer;
+
+        span {
+            background-color: rgb(249, 249, 249);
+            display: inline-block;
+
+            &:first-child {
+                height: 2px;
+                transform: translate(1px, 0px) rotate(0deg);
+                width: 16px;
+            }
+
+            &:nth-child(2) {
+                height: 16px;
+                transform: translateX(-8px) rotate(0deg);
+                width: 2px;
+            }
+        }
+`
+
+const GroupWatch = styled.div`
+        height: 44px;
+        width: 44px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        background: white;
+
+        div {
+            height: 40px;
+            width: 40px;
+            background: rgb(0, 0, 0);
+            border-radius: 50%;
+
+            img {
+                width: 100%;
+            }
+        }
+`
+
+const SubTitle = styled.div`
+        color: rgb(249, 249, 249);
+        font-size: 15px;
+        min-height: 20px;
+
+        @media (max-width: 768px) {
+            font-size: 12px;
+        }
+`
+
+const Description = styled.div`
+        line-height: 1.4;
+        font-size: 20px;
+        padding: 16px 0px;
+        color: rgb(249, 249, 249);
+
+        @media (max-width: 768px) {
+            font-size: 14px;
+        }
 `
