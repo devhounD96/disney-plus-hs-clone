@@ -10,6 +10,22 @@ const Detail = () => {
         <ImgTitle>
             <img src='https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/50B933E83609BEEFEDFA177A6D96DBFA7804C14F70A0B5AB314E892E65498ACF/scale?width=1440&aspectRatio=1.78' alt='' />
         </ImgTitle>
+        <ContentMeta>
+            <Controls>
+                <Player>
+                    <img src='/images/play-icon-black.png' alt='play icon' />
+                    <span>Play</span>
+                </Player>
+                <Trailer>
+                <img src='/images/play-icon-white.png' alt='trailer icon' />
+                    <span>Trailer</span>
+                </Trailer>
+                <AddList>
+                    <span></span>
+                    <span></span>
+                </AddList>
+            </Controls>
+        </ContentMeta>
     </Container>
   )
 }
@@ -44,5 +60,83 @@ const Background = styled.div`
 `
 
 const ImgTitle = styled.div`
+        align-items: flex-end;
+        display: flex;
+        -webkit-box-pack: start;
+        justify-content: flex-start;
+        margin: 0px auto;
+        height: 30vw;
+        min-height: 170px;
+        padding-bottom: 24px;
+        width: 100%;
 
+        img {
+            max-width: 600px;
+            min-width: 200px;
+            width: 35vw;
+        }
+`
+
+const ContentMeta = styled.div`
+        max-width: 874px;
+`
+
+const Controls = styled.div`
+        align-items: center;
+        display: flex;
+        flex-flow: row nowrap;
+        margin: 24px 0px;
+        min-height: 56px;
+`
+
+const Player = styled.button`
+        font-size: 15px;
+        margin: 0px 22px 0px 0px;
+        padding: 0px 24px;
+        height: 56px;
+        border-radius: 4px;
+        align-items: center;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        letter-spacing: 1.8px;
+        text-align: center;
+        text-transform: uppercase;
+        background: rgb(249, 249, 249);
+        border: none;
+        color: rgb(0, 0, 0);
+
+        img {
+            width: 32px;
+        }
+
+        &:hover {
+            background: rgb(198, 198, 198);
+        }
+
+        @media (max-width: 768px) {
+            height: 45px;
+            padding: 0px 22px;
+            font-size: 12px;
+            margin: 0px 10px 0px 0px;
+
+            img {
+                width: 25px;
+            }
+        }
+`
+
+const Trailer = styled(Player)`
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgb(249, 249, 249);
+        color: rgb(249, 249, 249);
+`
+
+const AddList = styled.div`
+        margin-right: 16px;
+        height: 44px;
+        width: 44px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 `
